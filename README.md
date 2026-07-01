@@ -13,6 +13,7 @@ mkdir -p logs ---- Pasta vazia para logs
 
 ###### Subir o ambiente pelo prompt
 
+docker compose up airflow-init ---- Inicializa o Airflow
 Docker compose up -d ---- Inicializa todo escopo no Docker e cria acesso ao Airflow
 
 ####### Acessar o Airflow
