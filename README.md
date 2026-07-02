@@ -1,44 +1,81 @@
-################################  Como executar  #######################################
-###### Pré-requisitos
+# Projeto - Pipeline de Dados com Apache Airflow
 
-Docker
-Docker Compose
-Python
+## 🚀 Inicialização do Ambiente
 
-###### Criar o caminho no prompt para a pasta da Atividade 1
+### 1. Inicializar o Airflow
 
-Cd ~/airflow-at1 ---- Caminho para pasta
-mkdir -p plugins ---- Pasta vazia para plugins
-mkdir -p logs ---- Pasta vazia para logs
+Execute o comando abaixo para realizar a configuração inicial do ambiente Airflow:
 
-###### Subir o ambiente pelo prompt
+```bash
+docker compose up airflow-init
+```
 
-docker compose up airflow-init ---- Inicializa o Airflow
-Docker compose up -d ---- Inicializa todo escopo no Docker e cria acesso ao Airflow
+### 2. Subir todos os serviços
 
-####### Acessar o Airflow
+Após a inicialização, execute:
 
-http://localhost:8080
-Usuário: admin
-Senha: admin
+```bash
+docker compose up -d
+```
 
-####### Executar a DAG
+Este comando iniciará todos os containers definidos no ambiente Docker, incluindo o Apache Airflow e os demais serviços necessários para a execução do pipeline.
 
-Ative a DAG at1_pipeline e clique no Trigger DAG.
+---
 
-####### Após execução completa do DAG, você pode, se preferir, consultar o resultado no próprio prompt utilizando:
+## 🌐 Acesso ao Airflow
+
+Após a inicialização dos serviços, acesse a interface web do Airflow:
+
+**URL:** http://localhost:8080
+
+### Credenciais de acesso
+
+| Campo   | Valor |
+| ------- | ----- |
+| Usuário | admin |
+| Senha   | admin |
+
+---
+
+## ▶️ Execução da DAG
+
+1. Acesse a interface do Airflow.
+2. Localize a DAG **`at1_pipeline`**.
+3. Ative a DAG utilizando o botão de habilitação.
+4. Clique em **Trigger DAG** para iniciar a execução.
+
+Aguarde a conclusão de todas as tarefas antes de prosseguir para a etapa de consulta dos resultados.
+
+---
+
+## 📊 Consulta dos Resultados
+
+Após a execução completa da DAG, é possível consultar os dados processados diretamente no banco PostgreSQL.
+
+### Acessar o banco de dados
+
+Execute o comando abaixo:
+
+```bash
 docker exec -it postgres_analytics psql -U airflow -d analytics
+```
 
-*Este código ativará o comando SQL no prompt
+Este comando abrirá o terminal SQL do PostgreSQL dentro do container.
 
-####### Aplicar o seguinte código para consulta no prompt:
+### Executar a consulta
 
+No prompt do PostgreSQL, execute:
+
+```sql
 SELECT
-categoria,
-quantidade_produtos,
-preco_medio,
-preco_minimo,
-preco_maximo,
-atualizado_em
+    categoria,
+    quantidade_produtos,
+    preco_medio,
+    preco_minimo,
+    preco_maximo,
+    atualizado_em
 FROM metricas_categoria
 ORDER BY categoria;
+```
+
+A consulta retornará as métricas agregadas por categoria geradas pelo pipeline de dados.
