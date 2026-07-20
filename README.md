@@ -8,6 +8,7 @@ Execute o comando abaixo para realizar a configuração inicial do ambiente Airf
 
 ```bash
 mkdir -p logs plugins
+chmod -R 777 logs
 docker compose up airflow-init
 ```
 
