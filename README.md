@@ -4,9 +4,10 @@
 
 ### 1. Inicializar o Airflow
 
-Execute o comando abaixo para realizar a configuração inicial do ambiente Airflow:
+Execute o comando abaixo para realizar a configuração inicial do ambiente Airflow e crie as pastas de plugins e logs antes da execução:
 
 ```bash
+mkdir -p dags logs plugins config
 docker compose up airflow-init
 ```
 
