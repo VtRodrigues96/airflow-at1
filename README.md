@@ -74,8 +74,7 @@ SELECT
     quantidade_produtos,
     preco_medio,
     preco_minimo,
-    preco_maximo,
-    atualizado_em
+    preco_maximo
 FROM metricas_categoria
 ORDER BY categoria;
 ```
